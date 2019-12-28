@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2019_12_26_215355) do
   create_table "records", force: :cascade do |t|
     t.integer "zone_id", null: false
     t.string "name", null: false
-    t.string "type", null: false
+    t.string "record_type", null: false
     t.string "data", null: false
     t.integer "ttl", default: 3600
     t.boolean "soa", default: false
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2019_12_26_215355) do
     t.integer "refresh_time"
     t.integer "retry_time"
     t.integer "expires_at"
+    t.string "domain_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["zone_id"], name: "index_records_on_zone_id"

@@ -3,7 +3,7 @@ class CreateRecords < ActiveRecord::Migration[6.0]
     create_table :records do |t|
       t.integer :zone_id, null: false
       t.string :name, null: false
-      t.string :type, null: false
+      t.string :record_type, null: false
       t.string :data, null: false
       t.integer :ttl, default: 3600
       t.boolean :soa, default: false
@@ -11,6 +11,7 @@ class CreateRecords < ActiveRecord::Migration[6.0]
       t.integer :refresh_time
       t.integer :retry_time
       t.integer :expires_at
+      t.string :domain_email
 
       t.timestamps
     end
