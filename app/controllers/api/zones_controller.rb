@@ -35,10 +35,10 @@ class Api::ZonesController < ApplicationController
     return invalid_header('User-Email') unless user = find_user(request.headers['User-Email'])
     return header_missing('API-KEY') unless request.headers['API-KEY'].present?
     return invalid_header('API-KEY') unless validate_api_key(user, request.headers['API-KEY'])
-    return param_missing('domain_name') unless params[:domain_name].present?
+    return missing_param('domain_name') unless params[:domain_name].present?
     return invalid_param('domain_name') unless validate_domain_name(params[:domain_name])
     return zone_already_exists unless check_zones(user, params[:domain_name])
-    return param_missing('ip_address') unless params[:ip_address].present?
+    return missing_param('ip_address') unless params[:ip_address].present?
     return invalid_param('ip_address') unless validate_ip_address(params[:ip_address])
 
     zone = Zone.new
@@ -46,11 +46,11 @@ class Api::ZonesController < ApplicationController
     return action_failed unless zone.save
 
     render json: {
-      code: 200,
+      code: 201,
       domain_name: zone.name,
       records: zone.view_records,
       message: "your zone was successfully created"
-    }, status: 200
+    }, status: 201
   rescue
     render_server_error
   end

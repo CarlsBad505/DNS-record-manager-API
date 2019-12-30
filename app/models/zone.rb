@@ -47,6 +47,7 @@ class Zone < ApplicationRecord
     if params[:add_records] && !params[:add_records].empty?
       params[:add_records].each do |record|
         if existing_record = records.find_by_name(record[:name].gsub('www.', '')) # if record already exists, update it.
+          next if existing_record.record_type == 'SOA' # user cannot modify this required record
           existing_record.name = record[:name].gsub('www.', '')
           existing_record.record_type = record[:record_type]
           existing_record.data = record[:data]
@@ -64,6 +65,7 @@ class Zone < ApplicationRecord
     if params[:remove_records] && !params[:remove_records].empty?
       params[:remove_records].each do |record|
         zone_record = records.find_by_name(record[:name].gsub('www.', ''))
+        next if zone_record.record_type == 'SOA' # user cannot modify this required record
         zone_record.destroy
       end
     end
