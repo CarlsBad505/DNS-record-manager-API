@@ -16,7 +16,9 @@ There are rspecs for routing and requests for every single API route. To run the
 ## API Documentation
 
 **POST** `v1/api/create_user`
+
 Required Params:
+
 ```
 {
   "email": "youremail@domain.com'
@@ -36,9 +38,10 @@ Response JSON:
 ---
 
 **POST** `v1/api/create_zone`
+
 Required Headers:
-`User-Email` <your email address>
-`API-KEY` <your api key>
+`User-Email` `<your email address>`
+`API-KEY` `<your api key>`
 
 Required Params:
 ```
@@ -74,9 +77,10 @@ Response JSON:
 ---
 
 **GET** `v1/api/view_zones`
+
 Required Headers:
-`User-Email` <your email address>
-`API-KEY` <your api key>
+`User-Email` `<your email address>`
+`API-KEY` `<your api key>`
 
 Response JSON:
 ```
@@ -153,9 +157,10 @@ Response JSON:
 ---
 
 **GET** `v1/api/view_zone/:domain_name`
+
 Required Headers:
-`User-Email` <your email address>
-`API-KEY` <your api key>
+`User-Email` `<your email address>`
+`API-KEY` `<your api key>`
 
 Required Params:
 `domain_name` <your domain name URL encoded>
@@ -185,10 +190,12 @@ Response JSON:
 ---
 
 **PUT** `v1/api/update_zone/:domain_name`
+
 *you can bulk edit records with the params example below, adding, updating, and deleting records all in one single API call*
+
 Required Headers:
-`User-Email` <your email address>
-`API-KEY` <your api key>
+`User-Email` `<your email address>`
+`API-KEY` `<your api key>`
 
 Required Params:
 `domain_name` <your domain name URL encoded>
@@ -252,9 +259,10 @@ Response JSON:
 ---
 
 **DELETE** `v1/api/delete_zone/:domain_name`
+
 Required Headers:
-`User-Email` <your email address>
-`API-KEY` <your api key>
+`User-Email` `<your email address>`
+`API-KEY` `<your api key>`
 
 Required Params:
 `domain_name` <your domain name URL encoded>
