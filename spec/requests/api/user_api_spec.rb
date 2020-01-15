@@ -58,6 +58,7 @@ RSpec.describe 'POST Create User', type: :request do
     expect(response).to have_http_status(201)
     expect(response_body).to have_key(:email)
     expect(response_body).to have_key(:api_key)
+    expect(User.all.count).to eq(2)
   end
 
 end

@@ -2,6 +2,13 @@ class Zone < ApplicationRecord
   belongs_to :user
   has_many :records, dependent: :destroy
 
+  validates :name, presence: true
+  validates :user_id, presence: true
+
+  def public_records
+    records.where(soa: false)
+  end
+
   def build_zone(user, params)
     self.user_id = user.id
     self.name = params[:domain_name].gsub('www.', '') # standard domain_name
@@ -31,8 +38,7 @@ class Zone < ApplicationRecord
 
   def view_records
     arr = []
-    records.each do |record|
-      next if record.soa == true # skip SOA records, user cannot edit them anyways
+    public_records.each do |record|
       arr << {
         name: record.name,
         record_type: record.record_type,

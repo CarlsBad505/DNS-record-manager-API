@@ -378,6 +378,7 @@ RSpec.describe "Zone Requests", type: :request do
     expect(response).to have_http_status(201)
     expect(response_body).to have_key(:records)
     expect(response_body).to have_key(:domain_name)
+    expect(Zone.all.count).to eq(2)
   end
 
   # PUT '/v1/api/update_zone/:domain_name'
@@ -531,5 +532,6 @@ RSpec.describe "Zone Requests", type: :request do
     expect(response_body[:code]).to eq(200)
     expect(response).to have_http_status(200)
     expect(response_body).to have_key(:domain_name)
+    expect(User.all.count).to eq(1)
   end
 end
