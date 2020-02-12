@@ -36,16 +36,14 @@ class Zone < ApplicationRecord
   end
 
   def view_records
-    arr = []
-    public_records.each do |record|
-      arr << {
+    public_records.map do |record|
+      {
         name: record.name,
         record_type: record.record_type,
         data: record.data,
         ttl: record.ttl
       }
     end
-    arr
   end
 
   def update_records(params)
