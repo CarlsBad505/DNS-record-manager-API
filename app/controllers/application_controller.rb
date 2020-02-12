@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
 
+  protected
+
   def missing_param(param)
     render json: {
       code: 422,
@@ -20,6 +22,14 @@ class ApplicationController < ActionController::Base
       code: 400,
       error: "#{email} already exists"
     }, status: 400
+  end
+
+  def validate_headers
+    return header_missing('User-Email') unless request.headers['User-Email'].present?
+    return invalid_header('User-Email') unless @user
+    return header_missing('API-KEY') unless request.headers['API-KEY'].present?
+    return invalid_header('API-KEY') unless validate_api_key(request.headers['API-KEY'])
+    @valid_headers = true
   end
 
   def header_missing(header)
@@ -49,6 +59,11 @@ class ApplicationController < ActionController::Base
       code: 500,
       error: "application crash, we have been notified of this error"
     }, status: 500
+  end
+
+  def validate_api_key(api_key)
+    token = BCrypt::Password.new(@user.hashed_token)
+    token == api_key
   end
 
 end

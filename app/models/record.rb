@@ -1,7 +1,9 @@
 class Record < ApplicationRecord
   belongs_to :zone
 
-  validates :name, presence: true
-  validates :record_type, presence: true
-  validates :data, presence: true
+  validates :name, :record_type, :data, presence: true
+
+  scope :query_soa, ->(condition) { where(soa: condition) }
+
+
 end

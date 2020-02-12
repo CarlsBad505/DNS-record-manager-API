@@ -2,8 +2,7 @@ class Zone < ApplicationRecord
   belongs_to :user
   has_many :records, dependent: :destroy
 
-  validates :name, presence: true
-  validates :user_id, presence: true
+  validates :name, :user_id, presence: true
 
   def public_records
     records.where(soa: false)
